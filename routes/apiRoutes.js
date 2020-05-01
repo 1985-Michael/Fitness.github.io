@@ -31,7 +31,7 @@ module.exports = function(app) {
 
 
         db.Workout.find({ _id: workoutId })
-            .then(dbWorkout => {
+            .then((dbWorkout) => {
                 savedExercises = dbWorkout[0].exercises;
                 res.json(dbWorkout[0].exercises);
                 let allExercises
@@ -39,7 +39,7 @@ module.exports = function(app) {
                 console.log(allExercises)
                 updateWorkout(allExercises)
             })
-            .catch(err => {
+            .catch((err) => {
                 res.json(err);
             });
 
