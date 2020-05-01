@@ -22,17 +22,20 @@ module.exports = function(app) {
     })
 
     app.put("/api/workouts/:id", ({ body, params }, res) => {
+        let workoutId;
+        workoutId = params.id;
+        let savedExercises;
 
-        const workoutId = params.id;
-        let savedExercises = [];
+
+        savedExercises = [];
 
 
         db.Workout.find({ _id: workoutId })
             .then(dbWorkout => {
-
                 savedExercises = dbWorkout[0].exercises;
                 res.json(dbWorkout[0].exercises);
-                let allExercises = [...savedExercises, body]
+                let allExercises
+                allExercises = [...savedExercises, body];
                 console.log(allExercises)
                 updateWorkout(allExercises)
             })
@@ -48,7 +51,6 @@ module.exports = function(app) {
 
             })
         }
-
     })
 
     app.get("/api/workouts/range", (req, res) => {
